@@ -1,0 +1,77 @@
+# E0_GraphCalculator
+
+Interactive 2D equation grapher built with the Ixtli UI/graphics framework.
+
+This example lets you type mathematical expressions and render them in real time,
+with support for multiple coordinate interpretations (cartesian, polar, inverse forms),
+zoom, pan, and dynamic grid labeling.
+
+## Features
+
+- Real-time expression parsing and plotting while typing.
+- Multiple equations in one session (press Enter to add a new equation slot).
+- Per-equation random colors (press Shift to recolor the most recent curve).
+- Mouse-based navigation:
+	- Drag to pan.
+	- Scroll up/down to zoom.
+- Automatic grid generation with adaptive spacing and numeric labels.
+- Built-in expression engine with:
+	- Constants: `pi`, `e`.
+	- Operators: `+`, `-`, `*`, `/`, `^`, unary minus.
+	- Functions: `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `sinc`, `exp`, `ln`,
+		`log`, `log2`, `sqrt`, `floor`, `ceil`, `sign`, `min`, `max`, `avg`.
+
+## Expression Modes
+
+The grapher infers the plotting mode from the variable used in the expression:
+
+- `x` -> Cartesian mode (`y = f(x)`).
+- `t` -> Polar mode (`r = f(t)`).
+- `y` -> Inverse Cartesian mode (`x = f(y)`).
+- `r` -> Inverse Polar mode (`t = f(r)`).
+
+If the expression does not validate for one of those variable sets, it is treated as invalid and not drawn.
+
+## Dependencies
+
+- C++11 compiler (g++ or compatible).
+- Ixtli (libixtli)
+    - OpenGL.
+    - freeglut.
+    - libuuid.
+    - freetype2 (If ixtli was builded with it).
+
+## Build
+### Set Ixtli environment
+```bash
+export IXTLI_TOP=<Ixtli install path>
+```
+or
+```bash
+export IXTLI_CPP_FLAGS=-I<Ixtli include path>
+export IXTLI_LD_FLAGS=-L<Ixtli lib path> -lixtli -Wl,-rpath=<Ixtli lib path>
+```
+
+### Make
+
+```bash
+make -j"$(nproc)"
+```
+
+## Run
+
+After building this example directly, the binary is generated at:
+
+```text
+./GraphCalculator
+```
+
+## Controls
+
+- Type expression in the input box to update current curve.
+- Enter: commit current valid expression and start a new empty slot.
+- Shift: change the latest curve color.
+- Mouse drag: pan.
+- Mouse wheel up/down: zoom in/out.
+
+
